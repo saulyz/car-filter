@@ -8,16 +8,19 @@
             <filter-item label="Large" :price="200"></filter-item>
             <filter-item label="SUV" :price="190"></filter-item>
             <filter-item label="Van" :price="271"></filter-item>
+            <filter-item-dropdown></filter-item-dropdown>
         </div>
     </div>
 </template>
 
 <script>
-import FilterItem from './Filter-item.vue';
+import filterItem from './Filter-item.vue';
+import filterItemDropdown from './Filter-item-dropdown.vue';
 
 export default {
     components: {
-        FilterItem
+        filterItem,
+        filterItemDropdown
     }
 }
 </script>
