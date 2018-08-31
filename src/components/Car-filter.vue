@@ -3,9 +3,11 @@
         <div class="filter-label">Car type</div>
         <div class="filter-wrapper">
             <filter-item label="All"></filter-item>
-            <filter-item label="pirmas" :price="123"></filter-item>
-            <filter-item label="antras" :price="123"></filter-item>
-            <filter-item label="trečias" :price="123"></filter-item>
+            <filter-item label="Small" :price="200"></filter-item>
+            <filter-item label="Medium" :price="200"></filter-item>
+            <filter-item label="Large" :price="200"></filter-item>
+            <filter-item label="SUV" :price="190"></filter-item>
+            <filter-item label="Van" :price="271"></filter-item>
         </div>
     </div>
 </template>

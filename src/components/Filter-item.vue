@@ -2,7 +2,7 @@
     <div class="filter-item boxed">
         {{label}}
         <span v-if="price" class="price">
-            {{price}}+
+            ${{price}}+
         </span>
     </div>
 </template>
