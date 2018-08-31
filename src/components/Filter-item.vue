@@ -1,5 +1,5 @@
 <template>
-    <div class="filter-item boxed">
+    <div class="filter-item boxed" :class="{active: isActive}" @click="toggle">
         {{label}}
         <span v-if="price" class="price">
             ${{price}}+
@@ -18,6 +18,17 @@ export default {
             type: Number,
             default: null
         }
+    },
+    data() {
+        return {
+            isActive: false
+        }
+    },
+
+    methods: {
+        toggle() {
+            this.isActive = !this.isActive;
+        }
     }
 }
 </script>
@@ -29,6 +40,7 @@ export default {
         font-size: 13px;
         line-height: 28px; 
         font-weight: bold;
+        user-select: none;
 
         &.boxed {
             color: #51697a;
@@ -36,7 +48,8 @@ export default {
             border-radius: 2px;
         }
 
-        &.boxed:hover {
+        &.boxed:hover,
+        &.boxed.active {
             cursor: pointer;
             border-color: #1e93f5;
             background-color: #1e93f5;
