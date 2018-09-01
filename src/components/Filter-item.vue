@@ -1,5 +1,5 @@
 <template>
-    <div class="filter-item boxed" :class="{active: isActive}" @click="toggle">
+    <div class="filter-item boxed" :class="{selected: isSelected}" @click="toggle">
         {{label}}
         <span v-if="price" class="price">
             ${{price}}+
@@ -21,13 +21,13 @@ export default {
     },
     data() {
         return {
-            isActive: false
+            isSelected: false
         }
     },
 
     methods: {
         toggle() {
-            this.isActive = !this.isActive;
+            this.isSelected = !this.isSelected;
         }
     }
 }
@@ -36,6 +36,7 @@ export default {
 <style lang="scss">
     .filter-item {
         height: 30px;
+        margin-bottom: 4px;
         padding: 0 16px;
         font-size: 13px;
         line-height: 28px; 
@@ -49,7 +50,7 @@ export default {
         }
 
         &.boxed:hover,
-        &.boxed.active {
+        &.boxed.selected {
             cursor: pointer;
             border-color: #1e93f5;
             background-color: #1e93f5;
