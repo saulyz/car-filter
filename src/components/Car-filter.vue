@@ -2,18 +2,17 @@
     <div>
         <div class="filter-label">Car type</div>
         <div class="filter-wrapper">
-            <filter-item label="All"></filter-item>
-            <filter-item label="Small" :price="200"></filter-item>
-            <filter-item label="Medium" :price="200"></filter-item>
-            <filter-item label="Large" :price="200"></filter-item>
-            <filter-item label="SUV" :price="190"></filter-item>
-            <filter-item label="Van" :price="271"></filter-item>
-            <filter-item-dropdown></filter-item-dropdown>
+            <filter-item label="All" :key="0"></filter-item>
+            <template v-for="item in filter">
+                <filter-item v-if="!item.children" :label="item.title" :price="item.value" :key="item.id"></filter-item>
+                <filter-item-dropdown v-else :label="item.title" :children="item.children" :key="item.id"></filter-item-dropdown>
+            </template>
         </div>
     </div>
 </template>
 
 <script>
+import filterData from './../mocks/filter-data.js';
 import filterItem from './Filter-item.vue';
 import filterItemDropdown from './Filter-item-dropdown.vue';
 
@@ -21,6 +20,11 @@ export default {
     components: {
         filterItem,
         filterItemDropdown
+    },
+    data() {
+        return {
+            filter: filterData
+        }
     }
 }
 </script>
