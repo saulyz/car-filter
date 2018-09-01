@@ -29,6 +29,9 @@ export default {
     },
 
     methods: {
+
+        // todo - should get reset event and clear all state
+
         set() {
             this.isActive = !this.isActive;
         }

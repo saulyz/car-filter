@@ -1,5 +1,5 @@
 <template>
-    <div class="filter-item boxed" :class="{selected: isSelected}" @click="toggle">
+    <div class="filter-item boxed" :class="{selected: isSelected}" @click="onToggle(id)">
         {{label}}
         <span v-if="price" class="price">
             ${{price}}+
@@ -10,6 +10,9 @@
 <script>
 export default {
     props: {
+        id: {
+            type: Number
+        },
         label: {
             type: String,
             default: ''
@@ -17,17 +20,13 @@ export default {
         price: {
             type: Number,
             default: null
-        }
-    },
-    data() {
-        return {
-            isSelected: false
-        }
-    },
-
-    methods: {
-        toggle() {
-            this.isSelected = !this.isSelected;
+        },
+        isSelected: {
+            type: Boolean,
+            default: false
+        },
+        onToggle: {
+            type: Function
         }
     }
 }
