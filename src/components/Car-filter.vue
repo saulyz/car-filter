@@ -81,6 +81,8 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "./../assets/config";
+    
     .filter-label {
         padding-bottom: 6px;
         font-size: 10px;

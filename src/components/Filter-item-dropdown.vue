@@ -9,11 +9,22 @@
                 <svg class="" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.35"><path d="M7 1.053L4.027 4 1 1" stroke="currentColor" fill="none"></path></svg>
             </div>
         </div>
+        <div class="filter-item-options" v-show="isOpen">
+            <div class="filter-item-option" v-for="item in items" :key="item.id">
+                <div>{{item.title}} <span>only</span></div>
+                <div>{{item.value}}</div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    props: {
+        items: {
+            type: Object
+        }
+    },
     data() {
         return {
             isActive: false
@@ -40,6 +51,8 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "./../assets/config";
+
     .filter-item.dropdown {
         display: flex;
         align-items: center;
@@ -51,9 +64,9 @@ export default {
         &.boxed:hover,
         &.boxed.open {
             cursor: pointer;
-            border-color: #1e93f5;
-            background-color: #1e93f5;
-            color: #fff;
+            border-color: $color-bg-highlight;
+            background-color: $color-bg-highlight;
+            color: $color-txt-highlight;
         }
 
         .icon {
@@ -76,5 +89,14 @@ export default {
         &.boxed.open .icon .open {
             transform: rotate(180deg);
         }
+    }
+
+    .filter-item-options {
+        background: $color-bg;
+    }
+
+    .filter-item-option {
+        display: flex;
+        justify-content: space-between;
     }
 </style>

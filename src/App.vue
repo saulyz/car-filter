@@ -16,21 +16,23 @@ export default {
 }
 </script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+<style lang="scss">
+  @import "assets/config";
 
-#app {
-  font-family: Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-.title {
-  margin-bottom: 30px;
-}
+  #app {
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: $color-txt;
+    margin-top: 60px;
+  }
+
+  .title {
+    margin-bottom: 30px;
+  }
 </style>

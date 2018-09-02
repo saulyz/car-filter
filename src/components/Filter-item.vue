@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "./../assets/config";
+
     .filter-item {
         height: 30px;
         margin-bottom: 4px;
@@ -43,16 +45,16 @@ export default {
         user-select: none;
 
         &.boxed {
-            color: #51697a;
-            border: 1px solid #e0e7ed;
+            color: $color-txt;
+            border: 1px solid $color-border;
             border-radius: 2px;
         }
 
         &.boxed:hover,
         &.boxed.selected {
             cursor: pointer;
-            border-color: #1e93f5;
-            background-color: #1e93f5;
+            border-color: $color-bg-highlight;
+            background-color: $color-bg-highlight;
             color: #fff;
         }
 
