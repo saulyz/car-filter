@@ -1,11 +1,15 @@
 <template>
-    <div class="filter-item boxed dropdown" :class="{open: isDirty}" @click="set">
+    <div class="filter-item boxed dropdown" 
+         :class="{dirty: isDirty, open: isOpen}" 
+         @click.self="openToggle"
+         v-click-outside="close"
+    >
         More
         <div class="icon">
-            <div v-if="isDirty" class="close">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.85 9.93" class="x-icon-x "><path style="fill:none;stroke:currentColor;stroke-miterlimit:10" d="M.71.79l8.43 8.43M9.14.71L.71 9.14"></path></svg>
+            <div v-if="isDirty" class="close" @click="resetAll">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.8 9" class="x-icon-x "><path style="fill:none;stroke:currentColor;stroke-miterlimit:10" d="M.71.79l8.43 8.43M9.14.71L.71 9.14"></path></svg>
             </div>
-            <div v-else class="open">
+            <div v-else class="open" @click.self="openToggle">
                 <svg class="" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.35"><path d="M7 1.053L4.027 4 1 1" stroke="currentColor" fill="none"></path></svg>
             </div>
         </div>
@@ -19,7 +23,7 @@
                     <label class="checkbox" for="`option-${item.id}`" @click="onToggle(item.id)">
                         <span>{{item.title}}</span>
                     </label>
-                    <span class="only">only</span>
+                    <span class="only" @click="onToggle(item.id, true)">only</span>
                 </div>
                 <div class="value">${{item.value}}</div>
             </div>
@@ -28,6 +32,8 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside';
+
 export default {
     props: {
         items: {
@@ -53,12 +59,24 @@ export default {
     },
 
     methods: {
-
-        // todo - should get reset event and clear all state
-
-        set() {
+        openToggle() {
             this.isActive = !this.isActive;
+        },
+
+        resetAll() {
+            this.items.map(item => {
+                item.isSelected = false;
+            });
+            this.isActive = false;
+        },
+
+        close() {
+            this.isActive = false;
         }
+    },
+
+    directives: {
+        ClickOutside
     }
 }
 </script>
@@ -75,11 +93,12 @@ export default {
         align-items: center;
         
         &.boxed {
-            padding-right: 2px;
+            padding-right: 4px;
         }
 
         &.boxed:hover,
-        &.boxed.open {
+        &.boxed.open,
+        &.boxed.dirty {
             cursor: pointer;
             border-color: $color-bg-highlight;
             background-color: $color-bg-highlight;
@@ -99,12 +118,18 @@ export default {
         .icon .close {
             width: 20px;
             padding: 5px;
+            line-height: 12px;
             transition: transform 0.1s ease;
             transform: rotate(0deg);
         }
 
         &.boxed.open .icon .open {
             transform: rotate(180deg);
+        }
+
+        &.boxed.dirty .icon .close {
+            background: #1979c9;
+            border-radius: 2px;
         }
     }
 

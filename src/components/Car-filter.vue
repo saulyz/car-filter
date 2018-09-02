@@ -71,8 +71,6 @@ export default {
         },
         
         toggleItem(id, only=false) {
-            console.log(id, 'is now selected. With flag only =', only);
-
             if (only) {
                 this.reset();
             }
