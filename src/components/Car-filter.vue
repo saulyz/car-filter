@@ -10,10 +10,13 @@
                         :price="item.value" 
                         :is-selected="item.isSelected"
                         :on-toggle="toggleItem"
-                        :key="item.id">
+                        :key="item.id"
+            >
             </filter-item>
             <filter-item-dropdown label="More" 
-                                  :items="filterItemsDropdown">
+                                  :items="filterItemsDropdown"
+                                  :on-toggle="toggleItem"
+            >
             </filter-item-dropdown>
         </div>
     </div>

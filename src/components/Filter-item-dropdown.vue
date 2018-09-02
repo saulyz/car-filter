@@ -12,8 +12,15 @@
         <div class="filter-item-options" v-show="isOpen">
             <div v-for="item in items" :key="item.id"
                  class="filter-item-option option-row" 
-                 :class="{selected: item.isSelected}">
-                <div class="title">{{item.title}} <span class="only">only</span></div>
+                 :class="{selected: item.isSelected}"
+            >
+                <div class="title">
+                    <input class="checkbox" type="checkbox" :id="`option-${item.id}`" :checked="item.isSelected"/>
+                    <label class="checkbox" for="`option-${item.id}`" @click="onToggle(item.id)">
+                        <span>{{item.title}}</span>
+                    </label>
+                    <span class="only">only</span>
+                </div>
                 <div class="value">${{item.value}}</div>
             </div>
         </div>
@@ -25,6 +32,9 @@ export default {
     props: {
         items: {
             type: Array
+        },
+        onToggle: {
+            type: Function
         }
     },
     data() {
@@ -55,6 +65,7 @@ export default {
 
 <style lang="scss">
     @import "./../assets/config";
+    @import "./../assets/checkbox";
     $color-txt-muted: #6d8494;
     $color-option-bg-highlight: #f1f4f7;
 
@@ -118,8 +129,11 @@ export default {
     }
 
     .option-row {
-        
+        height: 30px;
+
         .title {
+            display: flex;
+            align-items: center;
             height: 18px;
             font-size: 14px;
             line-height: 17.5px;
@@ -128,7 +142,7 @@ export default {
 
         .only {
             display: none;
-            margin-left: 3px;
+            margin-left: 5px;
             font-size: 12px;
         }
 
@@ -159,6 +173,7 @@ export default {
 
             .only {
                 display: inline-block;
+                padding-top: 2px;
                 color: $color-txt-muted;
             }
 
