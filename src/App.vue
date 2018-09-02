@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="title">Car filters</h1>
+    <h1 class="app-title">Car filters</h1>
     <car-filter></car-filter>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     margin-top: 60px;
   }
 
-  .title {
+  .app-title {
     margin-bottom: 30px;
   }
 </style>

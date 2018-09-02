@@ -59,7 +59,7 @@ const filterData = [
         id: 14,
         title: 'Commercial',
         value: 668,
-        isSelected: false,
+        isSelected: true,
         type: 'grouped'
     }
 ];

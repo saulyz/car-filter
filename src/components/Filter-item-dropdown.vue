@@ -1,5 +1,5 @@
 <template>
-    <div class="filter-item boxed dropdown" :class="{open: isActive}" @click="set">
+    <div class="filter-item boxed dropdown" :class="{open: isDirty}" @click="set">
         More
         <div class="icon">
             <div v-if="isDirty" class="close">
@@ -10,9 +10,11 @@
             </div>
         </div>
         <div class="filter-item-options" v-show="isOpen">
-            <div class="filter-item-option" v-for="item in items" :key="item.id">
-                <div>{{item.title}} <span>only</span></div>
-                <div>{{item.value}}</div>
+            <div v-for="item in items" :key="item.id"
+                 class="filter-item-option option-row" 
+                 :class="{selected: item.isSelected}">
+                <div class="title">{{item.title}} <span class="only">only</span></div>
+                <div class="value">${{item.value}}</div>
             </div>
         </div>
     </div>
@@ -22,7 +24,7 @@
 export default {
     props: {
         items: {
-            type: Object
+            type: Array
         }
     },
     data() {
@@ -35,7 +37,8 @@ export default {
             return this.isActive;
         },
         isDirty() {
-            return false;
+            const match = this.items.filter(item => item.isSelected === true);
+            return match.length;
         }
     },
 
@@ -52,8 +55,11 @@ export default {
 
 <style lang="scss">
     @import "./../assets/config";
+    $color-txt-muted: #6d8494;
+    $color-option-bg-highlight: #f1f4f7;
 
     .filter-item.dropdown {
+        position: relative;
         display: flex;
         align-items: center;
         
@@ -92,11 +98,73 @@ export default {
     }
 
     .filter-item-options {
+        position: absolute;
+        top: 33px;
+        right: 0;
+        width: 298px;
+        padding: 15px 24px 15px;
+        font-weight: normal;
+        color: $color-txt;
         background: $color-bg;
+        border-radius: 2px;
+        box-shadow: 0 3px 12px 1px rgba(0,0,0,0.26);
+        z-index: 1000;
     }
 
     .filter-item-option {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    .option-row {
+        
+        .title {
+            height: 18px;
+            font-size: 14px;
+            line-height: 17.5px;
+            color: $color-txt;
+        }
+
+        .only {
+            display: none;
+            margin-left: 3px;
+            font-size: 12px;
+        }
+
+        .value {
+            font-size: 12px;
+            color: $color-txt-muted;
+        }
+
+        &:hover,
+        &.selected {
+
+            &:before {
+                content: "";
+                position: absolute;
+                display: block;
+                left: 10px;
+                width: calc(100% - 20px);
+                height: 30px;
+                background: $color-option-bg-highlight;
+                border-radius: 2px;
+                z-index: -1;
+            }
+
+            .title,
+            .value {
+                color: $color-bg-highlight;
+            }
+
+            .only {
+                display: inline-block;
+                color: $color-txt-muted;
+            }
+
+            .only:hover {
+                text-decoration: underline;
+            }
+        }
     }
 </style>
