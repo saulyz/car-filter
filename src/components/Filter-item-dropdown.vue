@@ -167,8 +167,10 @@ export default {
 
         .only {
             display: none;
+            opacity: 0;
             margin-left: 5px;
             font-size: 12px;
+            transition: opacity .3s ease-out;
         }
 
         .value {
@@ -176,19 +178,25 @@ export default {
             color: $color-txt-muted;
         }
 
+        &:before {
+            content: "";
+            position: absolute;
+            display: block;
+            opacity: 0;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: 30px;
+            background: $color-option-bg-highlight;
+            border-radius: 2px;
+            z-index: -1;
+            transition: opacity .3s ease-out;
+        }
+
         &:hover,
         &.selected {
 
             &:before {
-                content: "";
-                position: absolute;
-                display: block;
-                left: 10px;
-                width: calc(100% - 20px);
-                height: 30px;
-                background: $color-option-bg-highlight;
-                border-radius: 2px;
-                z-index: -1;
+                opacity: 1;
             }
 
             .title,
@@ -197,6 +205,7 @@ export default {
             }
 
             .only {
+                opacity: 1;
                 display: inline-block;
                 padding-top: 2px;
                 color: $color-txt-muted;
